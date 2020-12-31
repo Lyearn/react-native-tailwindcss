@@ -1,48 +1,43 @@
-function generate(name, key, values, variation = []) {
-        let i = 0,
-            j = 0,
-            styles = {},
-            value = '',
-            styleName = '',
-            valueName = '',
-            keyName = '',
-            keys = '',
-            keyStyleName = '';
+function generate (name, key, values, variation = [], variantSpacing = '-') {
+    let styles = {},
+        value = '',
+        styleName = '',
+        valueName = '',
+        keyName = '',
+        keys = '',
+        keyStyleName = '';
 
-        const styleValues = parseThemeValues(values),
-            valuesLength = styleValues.length,
-            variationLength = variation.length;
+    const styleValues = parseThemeValues(values),
+        valuesLength = styleValues.length,
+        variationLength = variation.length;
 
-        for (; i < valuesLength; ++i) {
-            value = getValue(styleValues[i]);
-            valueName = getValueName(styleValues[i]);
-            keyName = getKeyName(name, valueName);
+    for (let i = 0; i < valuesLength; ++i) {
+        value = getValue(styleValues[i]);
+        valueName = getValueName(styleValues[i]);
+        keyName = getKeyName(name, valueName);
 
         styleName = translateKeys(keyName);
 
-            if (guardAgainstCssNotSupportedInReactNative(key, translateValues(value))) {
-                styles[styleName] = guardedKeyHandler(key, value);
-
-                continue;
-            }
+        if (guardAgainstCssNotSupportedInReactNative(key, translateValues(value))) {
+            styles[styleName] = guardedKeyHandler(key, value);
+            continue;
+        }
 
         styles[styleName] = keyHandler(key, value);
     }
 
     if (variationLength) {
-        j = 0;
         value = '';
         styleName = '';
         valueName = '';
         keyName = '';
         keyStyleName = '';
 
-        for (; j < variationLength; ++j) {
-            i = 0;
+        for (let j = 0; j < variationLength; ++j) {
             keyName = `${name}${variantSpacing}${variation[j][0]}`;
             keys = variation[j][1];
 
-            for (; i < valuesLength; ++i) {
+            for (let i = 0; i < valuesLength; ++i) {
                 value = getValue(styleValues[i]);
                 valueName = getValueName(styleValues[i]);
                 keyStyleName = getKeyName(keyName, valueName);
@@ -62,18 +57,18 @@ function generate(name, key, values, variation = []) {
     return styles;
 }
 
-function generateShadows(name, key, values) {
-        let i = 0,
-            styles = {},
-            value = '',
-            styleName = '',
-            valueName = '',
-            keyName = '',
-            shadowValues = {};
+function generateShadows (name, key, values) {
+    let i = 0,
+        styles = {},
+        value = '',
+        styleName = '',
+        valueName = '',
+        keyName = '',
+        shadowValues = {};
 
-        const
-            styleValues = parseThemeValues(values),
-            valuesLength = styleValues.length;
+    const
+        styleValues = parseThemeValues(values),
+        valuesLength = styleValues.length;
 
     for (; i < valuesLength; ++i) {
         value = getValue(styleValues[i]);
@@ -97,7 +92,7 @@ function generateShadows(name, key, values) {
     return styles;
 }
 
-function generateColors(colors) {
+function generateColors (colors) {
     let colorList = {},
         color,
         currentColor,
@@ -138,7 +133,7 @@ function generateColors(colors) {
     return colorList;
 }
 
-function getValue(value) {
+function getValue (value) {
     let valueToReturn = value;
 
     if (typeof value === 'object') {
@@ -156,7 +151,7 @@ function getValue(value) {
     return valueToReturn;
 }
 
-function getValueName(value) {
+function getValueName (value) {
     if (typeof value === 'object') {
         return value[0];
     }
@@ -164,7 +159,7 @@ function getValueName(value) {
     return value;
 }
 
-function getKeyName(name, valueName) {
+function getKeyName (name, valueName) {
     let keyName = valueName,
         prefix = name;
 
@@ -180,7 +175,7 @@ function getKeyName(name, valueName) {
     return keyName;
 }
 
-function keyHandler(keys, value) {
+function keyHandler (keys, value) {
     let i = 0, tempObject = {};
     const keysLength = keys.length;
 
@@ -197,7 +192,7 @@ function keyHandler(keys, value) {
     return tempObject;
 }
 
-function guardAgainstCssNotSupportedInReactNative(property, value) {
+function guardAgainstCssNotSupportedInReactNative (property, value) {
     if (property === 'zIndex' && typeof value !== 'number') {
         return true;
     }
@@ -217,7 +212,7 @@ function guardAgainstCssNotSupportedInReactNative(property, value) {
     return false;
 }
 
-function guardedKeyHandler(property, value) {
+function guardedKeyHandler (property, value) {
     let tempObject = {}, translatedValue = 0;
 
     if (property === 'zIndex' && typeof value !== 'number') {
@@ -247,37 +242,41 @@ function guardedKeyHandler(property, value) {
     return tempObject;
 }
 
-function translateKeys(name, prefix = '') {
+function translateKeys (name, prefix = '') {
     let translatedKey = name;
 
     if (translatedKey.search('default') !== -1) {
         translatedKey = `${prefix}${translatedKey.replace('-default', '')}`;
     }
 
-    if (translatedKey.search(/\//) !== -1) {
-        translatedKey = `${prefix}${translatedKey.replace('/', '_')}`;
+    if (translatedKey.search('DEFAULT') !== -1) {
+        translatedKey = `${prefix}${translatedKey.replace('-DEFAULT', '')}`;
     }
 
-    if (translatedKey.search(/^-[a-zA-Z]/) !== -1) {
-        translatedKey = `${prefix}${translatedKey.replace(/^(-)[a-zA-Z]/g, (result) => {
-            return result.replace('-', '_');
-        })}`;
-    }
-
-    if (translatedKey.search('-') !== -1) {
-        translatedKey = translatedKey.replace(/-([a-z])/g, (result) => {
-            return result[1].toUpperCase();
-        });
-    }
-
-    if (translatedKey.search(/^[a-zA-Z_]+-[0-9]/) !== -1) {
-        translatedKey = `${prefix}${translatedKey.replace('-', '')}`;
-    }
+    // if (translatedKey.search(/\//) !== -1) {
+    //     translatedKey = `${prefix}${translatedKey.replace('/', '_')}`;
+    // }
+    //
+    // if (translatedKey.search(/^-[a-zA-Z]/) !== -1) {
+    //     translatedKey = `${prefix}${translatedKey.replace(/^(-)[a-zA-Z]/g, (result) => {
+    //         return result.replace('-', '_');
+    //     })}`;
+    // }
+    //
+    // if (translatedKey.search('-') !== -1) {
+    //     translatedKey = translatedKey.replace(/-([a-z])/g, (result) => {
+    //         return result[1].toUpperCase();
+    //     });
+    // }
+    //
+    // if (translatedKey.search(/^[a-zA-Z_]+-[0-9]/) !== -1) {
+    //     translatedKey = `${prefix}${translatedKey.replace('-', '')}`;
+    // }
 
     return translatedKey;
 }
 
-function translateValues(content) {
+function translateValues (content) {
     let translatedValue = content;
 
     if (translatedValue === 'transparent') {
@@ -329,7 +328,7 @@ function translateValues(content) {
     return translatedValue;
 }
 
-function getShadowValues(content) {
+function getShadowValues (content) {
     let results, color, elevation;
 
     if (content === 'none' || content.search(/inset/) !== -1) {
@@ -366,7 +365,7 @@ function getShadowValues(content) {
     };
 }
 
-function parseThemeValues(values) {
+function parseThemeValues (values) {
     if (typeof values === 'object' && !Array.isArray(values)) {
         return toArray(values);
     }
@@ -374,7 +373,7 @@ function parseThemeValues(values) {
     return values;
 }
 
-function toArray(object) {
+function toArray (object) {
     return Object.keys(object).map(value => {
         return [value, object[value]];
     });
@@ -394,5 +393,5 @@ export default {
     translateValues,
     getShadowValues,
     parseThemeValues,
-    toArray
-}
+    toArray,
+};

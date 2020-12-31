@@ -1,4 +1,3 @@
-import {StyleSheet} from 'react-native';
 import resolveConfig from 'tailwindcss/resolveConfig'
 
 import _merge from 'lodash/merge';
@@ -27,8 +26,7 @@ export class Tailwind {
         style = _merge(style, this._addPlugin(this.config.plugins || []));
 
         this.resetCache();
-        this.style = StyleSheet.create(style);
-
+        this.style = style;
         return this.style;
     }
 
@@ -91,7 +89,11 @@ export class Tailwind {
         const theme = this.config.theme;
 
         cp.map(function (pluginName) {
-            style = {...style, ...corePlugins[pluginName]({theme, colors})}
+            try {
+                style = {...style, ...corePlugins[pluginName]({theme, colors})}
+            } catch(e) {
+                console.log('empty: -- ', pluginName);
+            }
         });
 
         return style;
