@@ -1,25 +1,25 @@
 {
     "name": "@lyearn/react-native-tailwindcss",
-    "version": "2.0.0",
+    "description": "A React Native translation of TailwindCSS",
+    "author": "Lyearn Team",
+    "license": "ISC",
+    "version": "2.0.1",
     "keywords": [
         "react",
         "native",
         "tailwind",
         "css"
     ],
-    "repository": "https://github.com/TVke/react-native-tailwindcss.git",
-    "bugs": "https://github.com/TVke/react-native-tailwindcss/issues",
-    "homepage": "https://tvke.github.io/react-native-tailwindcss/",
-    "bin": {
-        "RNtailwindcss": "./cli.sh"
-    },
+    "repository": "https://github.com/Lyearn/react-native-tailwindcss.git",
+    "bugs": "https://github.com/Lyearn/react-native-tailwindcss/issues",
     "scripts": {
+        "build": "rm -rf dist &&  babel . --ignore node_modules,__tests__,dist,jest.config.js --out-dir dist",
         "test": "jest"
     },
-    "description": "A React Native translation of TailwindCSS",
-    "main": "index.js",
-    "author": "TVke",
-    "license": "ISC",
+    "files": [
+        "dist"
+    ],
+    "main": "dist/index.js",
     "peerDependencies": {
         "react-native": "*"
     },
