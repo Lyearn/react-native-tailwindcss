@@ -3,7 +3,7 @@
     "description": "A React Native translation of TailwindCSS",
     "author": "Lyearn Team",
     "license": "ISC",
-    "version": "2.0.1",
+    "version": "2.0.4",
     "keywords": [
         "react",
         "native",
@@ -13,6 +13,7 @@
     "repository": "https://github.com/Lyearn/react-native-tailwindcss.git",
     "bugs": "https://github.com/Lyearn/react-native-tailwindcss/issues",
     "scripts": {
+        "prepare": "npm run build",
         "build": "rm -rf dist &&  babel . --ignore node_modules,__tests__,dist,jest.config.js --out-dir dist",
         "test": "jest"
     },
