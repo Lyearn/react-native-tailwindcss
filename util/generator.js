@@ -253,7 +253,7 @@ function translateKeys (name, prefix = '') {
         translatedKey = `${prefix}${translatedKey.replace('-DEFAULT', '')}`;
     }
 
-    // if (translatedKey.search(/\//) !== -1) {
+    // if (translatedKey.search(/\//) !== -1) { // TODO: need css style keys and not cameCase
     //     translatedKey = `${prefix}${translatedKey.replace('/', '_')}`;
     // }
     //
@@ -301,21 +301,21 @@ function translateValues (content) {
         return parseInt(translatedValue);
     }
 
-    if (content.search(/^-?[0-9]*(\.[0-9]+)?rem$/) !== -1) {
-        translatedValue = content.replace('rem', '');
-
-        translatedValue = parseFloat(translatedValue) * 16;
-
-        return Math.round(translatedValue);
-    }
-
-    if (content.search(/^-?[0-9]*(\.[0-9]+)?em$/) !== -1) {
-        translatedValue = content.replace('em', '');
-
-        translatedValue = parseFloat(translatedValue) * 16;
-
-        return Math.round(translatedValue);
-    }
+    // if (content.search(/^-?[0-9]*(\.[0-9]+)?rem$/) !== -1) { // TODO: need rem as it is useful when using with react-native-extended-stylesheet
+    //     translatedValue = content.replace('rem', '');
+    //
+    //     translatedValue = parseFloat(translatedValue) * 16;
+    //
+    //     return Math.round(translatedValue);
+    // }
+    //
+    // if (content.search(/^-?[0-9]*(\.[0-9]+)?em$/) !== -1) {
+    //     translatedValue = content.replace('em', '');
+    //
+    //     translatedValue = parseFloat(translatedValue) * 16;
+    //
+    //     return Math.round(translatedValue);
+    // }
 
     if (content.search(/^-?[0-9]+$/) !== -1) {
         return parseInt(translatedValue);
