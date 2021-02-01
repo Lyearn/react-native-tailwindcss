@@ -3,7 +3,7 @@
     "description": "A React Native translation of TailwindCSS",
     "author": "Lyearn Team",
     "license": "ISC",
-    "version": "2.0.5-alpha",
+    "version": "2.0.5",
     "keywords": [
         "react",
         "native",
