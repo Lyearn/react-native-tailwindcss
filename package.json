@@ -1,41 +1,54 @@
 {
-    "name": "@lyearn/react-native-tailwindcss",
-    "description": "A React Native translation of TailwindCSS",
-    "author": "Lyearn Team",
-    "license": "ISC",
-    "version": "2.0.5",
-    "keywords": [
-        "react",
-        "native",
-        "tailwind",
-        "css"
-    ],
-    "repository": "https://github.com/Lyearn/react-native-tailwindcss.git",
-    "bugs": "https://github.com/Lyearn/react-native-tailwindcss/issues",
-    "scripts": {
-        "prepare": "npm run build",
-        "build": "rm -rf dist &&  babel . --ignore node_modules,__tests__,dist,jest.config.js --out-dir dist",
-        "test": "jest"
-    },
-    "files": [
-        "dist"
-    ],
-    "main": "dist/index.js",
-    "peerDependencies": {
-        "react-native": "*"
-    },
-    "dependencies": {
-        "tailwindcss": "^2.0.2"
-    },
-    "devDependencies": {
-        "@babel/core": "^7.10.5",
-        "@babel/plugin-proposal-class-properties": "^7.12.1",
-        "@babel/plugin-proposal-decorators": "^7.12.1",
-        "@babel/preset-env": "^7.10.4",
-        "babel-jest": "^26.1.0",
-        "jest": "^26.1.0",
-        "react": "^16.13.1",
-        "react-native": "^0.63.2",
-        "react-test-renderer": "^16.13.1"
-    }
+  "name": "@lyearn/react-native-tailwindcss",
+  "description": "A React Native translation of TailwindCSS",
+  "author": "Lyearn Team",
+  "license": "ISC",
+  "version": "2.0.5",
+  "keywords": [
+    "react",
+    "native",
+    "tailwind",
+    "css"
+  ],
+  "repository": "https://github.com/Lyearn/react-native-tailwindcss.git",
+  "bugs": "https://github.com/Lyearn/react-native-tailwindcss/issues",
+  "scripts": {
+    "prepare": "yarn prebuild && yarn build",
+    "prebuild": "rm -rf dist",
+    "build": "babel ./src --out-dir dist",
+    "build:watch": "yarn build -w",
+    "lint": "eslint ./src --fix"
+  },
+  "files": [
+    "dist"
+  ],
+  "main": "dist/tailwind.js",
+  "peerDependencies": {
+    "react-native": "*"
+  },
+  "dependencies": {
+    "lodash": "*",
+    "tailwindcss": "^2.0.2"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.14.3",
+    "@babel/core": "^7.10.5",
+    "@babel/plugin-proposal-class-properties": "^7.12.1",
+    "@babel/plugin-proposal-decorators": "^7.12.1",
+    "@babel/preset-env": "^7.10.4",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.27.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-config-react-app": "^6.0.0",
+    "eslint-plugin-flowtype": "^5.7.2",
+    "eslint-plugin-import": "^2.23.3",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-prettier": "^3.4.0",
+    "eslint-plugin-react": "^7.23.2",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "prettier": "^2.3.0",
+    "react": "^16.13.1",
+    "react-native": "^0.63.2",
+    "react-test-renderer": "^16.13.1"
+  }
 }

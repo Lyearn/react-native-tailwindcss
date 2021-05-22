@@ -1,21 +1,12 @@
 # react-native-tailwindcss [![npm](https://img.shields.io/npm/v/react-native-tailwindcss.svg)](https://github.com/TVke/react-native-tailwindcss/releases) [![npm](https://img.shields.io/npm/dt/react-native-tailwindcss.svg)](https://www.npmjs.com/package/react-native-tailwindcss) [![docs](https://img.shields.io/badge/read-docs-38b2ac)](https://tvke.github.io/react-native-tailwindcss)
 ## A react-native styling system, based on [TailwindCSS](https://tailwindcss.com/docs/what-is-tailwind/)
 Easily apply styles to react native components in a <a href='https://tailwindcss.com/docs/what-is-tailwind/'>tailwindCSS</a>-like fashion.
-The utility classes are transformed to valid object names and are all children of an object ( `t`, `tw`, `theme` or `tailwind`).
 
-```jsx harmony
-import { t } from 'react-native-tailwindcss';
-
-<View style={[t.absolute, t.inset0, t.p4, t.bgBlue500, t._mx2, t.w1_2]} />
-```
-
-or if you want to use `tailwind's` class name instead.
 ```jsx harmony
 import { c } from 'react-native-tailwindcss';
 
 <View style={c('absolute inset-0 p-4 bg-blue-500 -mx-2 w-1/2')} />
-```
-(Both above examples are same).  
+``` 
 
 Use the `tailwind.config.js` file you know and love, to customize your styles or just use default tailwind styles.
 
@@ -27,15 +18,6 @@ import { color } from 'react-native-tailwindcss';
 
 <StatusBar backgroundColor={color.blue500} />
 ```
-
-React native has no default css styling so there are some *special cases*.
-Some elements like breakpoints, plugins, corePlugin disabling, prefixes, separators, variation and the important toggle are not necessary and are ignored.
-
-You should also take a look at some special cases:
- - [separator handling (`-m-5` and `w-1/5`)](#general-conventions)
- - [shadows](#shadows)
- - [directional layout](#directional-layout)
- - [more details](https://tvke.github.io/react-native-tailwindcss/special-cases.html)
 
 ## Usage
 Install this package
